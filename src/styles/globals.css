@@ -1,0 +1,16 @@
+/* variables */
+:root {
+  --black-primary: #191919;
+  --yellow-primary: #fec52e;
+  --white-primary: #ffffff;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background-color: var(--black-primary);
+  color: var(--white-primary);
+}
