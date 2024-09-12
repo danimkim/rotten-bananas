@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import styles from "./searchable-layout.module.css";
 interface IProps {
   children: React.ReactNode;
 }
@@ -27,18 +27,19 @@ export default function SearchableLayout({ children }: IProps) {
   }, [q]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           placeholder="검색어를 입력해주세요..."
           onChange={handleChange}
           value={search}
+          className={styles.searchBar}
         />
-        <button type="submit" aria-label="Search">
+        <button type="submit" aria-label="Search" className={styles.searchBtn}>
           검색
         </button>
       </form>
       {children}
-    </div>
+    </>
   );
 }

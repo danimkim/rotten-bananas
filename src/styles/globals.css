@@ -3,6 +3,8 @@
   --black-primary: #191919;
   --yellow-primary: #fec52e;
   --white-primary: #ffffff;
+  --gray-primary: #434343;
+  --gray-secondary: #646464;
 }
 
 html,
@@ -13,4 +15,12 @@ body {
 body {
   background-color: var(--black-primary);
   color: var(--white-primary);
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
 }
