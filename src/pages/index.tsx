@@ -7,7 +7,7 @@ import styles from "./index.module.css";
 export default function Home() {
   return (
     <>
-      <section>
+      <section className={styles.section}>
         <h2>지금 가장 추천하는 영화</h2>
         <div className={styles.recommendMovieList}>
           {movies.slice(0, 3).map((movie) => (
@@ -15,7 +15,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section>
+      <section className={styles.section}>
         <h2>등록된 모든 영화</h2>
         <div className={styles.allMovieList}>
           {movies.map((movie) => (
