@@ -3,8 +3,22 @@ import { ReactNode } from "react";
 import MovieCard from "@/components/movie-card";
 import movies from "@/mock/movies.json";
 import styles from "./index.module.css";
+import { InferGetServerSidePropsType } from "next";
+import fetchMovies from "@/lib/fetch-movies";
 
-export default function Home() {
+export const getServerSideProps = async () => {
+  const allMovies = await fetchMovies();
+
+  return {
+    props: {
+      allMovies,
+    },
+  };
+};
+
+export default function Home({
+  allMovies,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <section className={styles.section}>
@@ -18,7 +32,7 @@ export default function Home() {
       <section className={styles.section}>
         <h2>등록된 모든 영화</h2>
         <div className={styles.allMovieList}>
-          {movies.map((movie) => (
+          {allMovies.map((movie) => (
             <MovieCard key={movie.id} {...movie} />
           ))}
         </div>
