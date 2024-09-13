@@ -7,8 +7,10 @@ import fetchMovies from "@/lib/fetch-movies";
 import fetchRandomMovies from "@/lib/fetch-random-movies";
 
 export const getServerSideProps = async () => {
-  const allMovies = await fetchMovies();
-  const recommendMovies = await fetchRandomMovies();
+  const [allMovies, recommendMovies] = await Promise.all([
+    fetchMovies(),
+    fetchRandomMovies(),
+  ]);
 
   return {
     props: {
