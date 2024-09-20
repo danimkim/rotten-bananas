@@ -1,15 +1,26 @@
 import Image from "next/image";
 import styles from "./[id].module.css";
-import { GetServerSidePropsContext } from "next";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import fetchMovie from "@/lib/fetch-movie";
-import { MovieData } from "@/types";
+import { useRouter } from "next/router";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
+export const getStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params?.id;
 
   const movie = await fetchMovie(Number(id));
+
+  if (!movie) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
@@ -17,7 +28,16 @@ export const getServerSideProps = async (
     },
   };
 };
-export default function MovieDetail({ movie }: { movie: MovieData }) {
+
+export default function MovieDetail({
+  movie,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if (router.isFallback) return "로딩중입니다";
+
+  if (!movie) return "문제가 발생했습니다. 다시 시도해주세요.";
+
   const {
     title,
     releaseDate,
