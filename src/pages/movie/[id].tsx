@@ -3,10 +3,10 @@ import styles from "./[id].module.css";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import fetchMovie from "@/lib/fetch-movie";
 import { useRouter } from "next/router";
-import fetchAllMovies from "@/lib/fetch-all-movies";
+import fetchMovies from "@/lib/fetch-movies";
 
 export const getStaticPaths = async () => {
-  const res = await fetchAllMovies();
+  const res = await fetchMovies();
 
   const movieIds = res.map((movie) => ({
     params: { id: movie.id.toString() },
