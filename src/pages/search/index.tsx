@@ -5,6 +5,8 @@ import MovieCard from "@/components/movie-card";
 import styles from "./index.module.css";
 import fetchMovies from "@/lib/fetch-movies";
 import { MovieData } from "@/types";
+import AppHead from "@/components/app-head";
+import { meta } from "@/constants";
 
 export default function Search() {
   const [movies, setMovies] = useState<MovieData[]>([]);
@@ -23,14 +25,22 @@ export default function Search() {
   }, [q]);
 
   return (
-    <section className={styles.section}>
-      <h2>검색 결과: {`"${q || ""}"`}</h2>
-      <div className={styles.searchResultList}>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
-      </div>
-    </section>
+    <>
+      <AppHead
+        pageTitle={`Search Results | ${meta.default.pageTitle}`}
+        title={`Search Results | ${meta.default.pageTitle}`}
+        imageUrl={meta.default.imageUrl}
+        desc={meta.default.desc}
+      />
+      <section className={styles.section}>
+        <h2>검색 결과: {`"${q || ""}"`}</h2>
+        <div className={styles.searchResultList}>
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} {...movie} />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 

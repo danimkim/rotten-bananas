@@ -3,10 +3,12 @@ import styles from "./[id].module.css";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import fetchMovie from "@/lib/fetch-movie";
 import { useRouter } from "next/router";
-import fetchAllMovies from "@/lib/fetch-all-movies";
+import fetchMovies from "@/lib/fetch-movies";
+import AppHead from "@/components/app-head";
+import { meta } from "@/constants";
 
 export const getStaticPaths = async () => {
-  const res = await fetchAllMovies();
+  const res = await fetchMovies();
 
   const movieIds = res.map((movie) => ({
     params: { id: movie.id.toString() },
@@ -41,7 +43,19 @@ export default function MovieDetail({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
-  if (router.isFallback) return "로딩중입니다";
+  if (router.isFallback) {
+    return (
+      <>
+        <AppHead
+          pageTitle={meta.default.pageTitle}
+          title={meta.default.title}
+          imageUrl={meta.default.imageUrl}
+          desc={meta.default.desc}
+        />
+        <div>로딩중입니다...</div>
+      </>
+    );
+  }
 
   if (!movie) return "문제가 발생했습니다. 다시 시도해주세요.";
 
@@ -58,6 +72,12 @@ export default function MovieDetail({
 
   return (
     <>
+      <AppHead
+        pageTitle={`${title} | ${meta.default.pageTitle}`}
+        title={`${title} | ${meta.default.pageTitle}`}
+        imageUrl={posterImgUrl}
+        desc={description}
+      />
       <div
         style={{ backgroundImage: `url(${posterImgUrl})` }}
         className={styles.posterBackground}
