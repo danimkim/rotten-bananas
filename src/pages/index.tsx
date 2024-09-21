@@ -5,6 +5,8 @@ import styles from "./index.module.css";
 import { InferGetStaticPropsType } from "next";
 import fetchMovies from "@/lib/fetch-movies";
 import fetchRandomMovies from "@/lib/fetch-random-movies";
+import AppHead from "@/components/app-head";
+import { meta } from "@/constants";
 
 export const getStaticProps = async () => {
   const [allMovies, recommendMovies] = await Promise.all([
@@ -27,6 +29,12 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <AppHead
+        pageTitle={meta.default.title}
+        title={meta.default.title}
+        imageUrl={meta.default.imageUrl}
+        desc={meta.default.desc}
+      />
       <section className={styles.section}>
         <h2>지금 가장 추천하는 영화</h2>
         <div className={styles.recommendMovieList}>
