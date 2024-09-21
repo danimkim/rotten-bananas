@@ -1,7 +1,7 @@
 import { MovieData } from "@/types";
 
 export default async function fetchMovies(q?: string): Promise<MovieData[]> {
-  let url = `http://localhost:12345/movie`;
+  let url = `http://${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/movie`;
 
   if (q) {
     url += `/search?q=${q}`;
