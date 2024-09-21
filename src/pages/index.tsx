@@ -17,6 +17,7 @@ export const getStaticProps = async () => {
       allMovies,
       recommendMovies,
     },
+    revalidate: 3,
   };
 };
 
