@@ -6,10 +6,15 @@ import { useEffect, useState } from "react";
 export default function Searchbar() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const q = searchParams.get("q") || "";
+
   const [searchInput, setSearchInput] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!searchInput || searchInput === q) return;
+
     router.push(`/search?q=${searchInput}`);
   };
 
@@ -17,12 +22,8 @@ export default function Searchbar() {
     setSearchInput(e.target.value);
 
   useEffect(() => {
-    const searchParam = searchParams.get("q");
-
-    if (searchParam) {
-      setSearchInput(searchParam.toString());
-    }
-  }, [searchParams]);
+    setSearchInput(q);
+  }, [q]);
 
   return (
     <form onSubmit={handleSubmit}>
