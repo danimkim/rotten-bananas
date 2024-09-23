@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Searchbar from "./components/Searchbar";
 
 export default async function Layout({
@@ -7,7 +8,9 @@ export default async function Layout({
 }) {
   return (
     <>
-      <Searchbar />
+      <Suspense>
+        <Searchbar />
+      </Suspense>
       {children}
     </>
   );
