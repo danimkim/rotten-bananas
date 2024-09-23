@@ -1,7 +1,16 @@
-export default function Layout({ children }: { children: React.ReactNode }) {
+import { Suspense } from "react";
+import Searchbar from "./components/Searchbar";
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
-      <div>서치바 레이아웃</div>
+      <Suspense>
+        <Searchbar />
+      </Suspense>
       {children}
     </>
   );
