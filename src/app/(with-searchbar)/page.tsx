@@ -27,8 +27,8 @@ export default function Home() {
 
 const headingStyle = css({
   marginTop: "10",
-  fontSize: "20px",
-  fontWeight: 600,
+  fontSize: "25px",
+  fontWeight: 800,
 });
 
 const containerRecipe = cva({
