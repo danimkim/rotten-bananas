@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { css } from "../../styled-system/css";
+import Logo from "./public/logo.png";
+import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +17,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <header className={style}>
+          <h1>
+            <Link href={"/"}>
+              <Image src={Logo} alt="Rotten Bananas" width={161} />
+            </Link>
+          </h1>
+        </header>
+        <main className={style}>{children}</main>
+        <footer></footer>
+      </body>
     </html>
   );
 }
+
+const style = css({
+  maxWidth: "1100px",
+  margin: "20px auto 0",
+  padding: "0 20px",
+});

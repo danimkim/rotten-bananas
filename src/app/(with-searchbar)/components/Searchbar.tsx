@@ -2,6 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { css } from "../../../../styled-system/css";
+import { hstack } from "../../../../styled-system/patterns";
 
 export default function Searchbar() {
   const router = useRouter();
@@ -26,14 +28,41 @@ export default function Searchbar() {
   }, [q]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className={hstack({ gap: "4", height: "50", justify: "space-between" })}
+    >
       <input
         type="text"
         placeholder="검색어를 입력하세요"
         value={searchInput}
         onChange={handleChange}
+        className={inputStyle}
       />
-      <button type="submit">검색</button>
+      <button type="submit" className={buttonStyle}>
+        검색
+      </button>
     </form>
   );
 }
+
+const inputStyle = css({
+  width: "100%",
+  height: "50",
+  border: "solid 1px var(--gray-secondary)",
+  color: "var(--gray-secondary)",
+  borderRadius: "5",
+  paddingX: "5",
+});
+
+const buttonStyle = css({
+  width: "100",
+  height: "full",
+  bgColor: "var(--gray-primary)",
+  color: "var(--white-primary)",
+  borderRadius: "5",
+  _hover: {
+    transition: "all ease-in-out 0.2s",
+    bgColor: "var(--gray-secondary)",
+  },
+});
