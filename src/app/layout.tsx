@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header className={style}>
-          <h1>
+          <h1 className={css({ display: "inline-block" })}>
             <Link href={"/"}>
               <Image src={Logo} alt="Rotten Bananas" width={161} />
             </Link>
@@ -35,5 +35,5 @@ export default function RootLayout({
 const style = css({
   maxWidth: "1100px",
   margin: "20px auto 0",
-  padding: "0 20px",
+  paddingX: "5",
 });
