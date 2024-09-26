@@ -1,21 +1,26 @@
 import { css } from "../../../../styled-system/css";
 import MovieCard from "../components/MovieCard";
-import mockData from "./../../mock/dummy.json";
+import { MovieData } from "@/app/type";
 
 interface IProps {
   searchParams: {
-    q?: string;
+    q: string;
   };
 }
 
-export default function Page({ searchParams }: IProps) {
+export default async function Page({ searchParams: { q } }: IProps) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`
+  );
+  const searchResults = await res.json();
+
   return (
     <section className={css({ marginTop: "5" })}>
       <h2 className={css({ fontSize: "24px", fontWeight: 800 })}>
-        검색결과: {searchParams.q || ""}
+        검색결과: {q || ""}
       </h2>
       <div className={containerStyle}>
-        {mockData.slice(0, 1).map((data) => (
+        {searchResults.map((data: MovieData) => (
           <MovieCard key={data.id} {...data} />
         ))}
       </div>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { css } from "../../../../styled-system/css";
-import mockData from "./../../mock/dummy.json";
 
 interface IProps {
   params: {
@@ -8,7 +7,13 @@ interface IProps {
   };
 }
 
-export default function Page({ params }: IProps) {
+export default async function Page({ params }: IProps) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
+    { cache: "force-cache" }
+  );
+  const movieData = await res.json();
+
   const {
     title,
     releaseDate,
@@ -18,7 +23,7 @@ export default function Page({ params }: IProps) {
     description,
     runtime,
     posterImgUrl,
-  } = mockData[0];
+  } = movieData;
 
   return (
     <>
