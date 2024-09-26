@@ -8,7 +8,7 @@ export default async function Layout({
 }) {
   return (
     <>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Searchbar />
       </Suspense>
       {children}
