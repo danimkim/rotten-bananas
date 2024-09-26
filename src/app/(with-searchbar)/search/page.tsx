@@ -10,7 +10,8 @@ interface IProps {
 
 export default async function Page({ searchParams: { q } }: IProps) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
+    { cache: "force-cache" }
   );
   const searchResults = await res.json();
 

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { css } from "../../../../styled-system/css";
+import { MovieData } from "@/app/type";
+import { notFound } from "next/navigation";
 
 interface IProps {
   params: {
@@ -7,11 +9,27 @@ interface IProps {
   };
 }
 
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
+  const movieData = await res.json();
+
+  return movieData.map((data: MovieData) => ({ id: data.id.toString() }));
+}
+
 export default async function Page({ params }: IProps) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
-    { cache: "force-cache" }
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`
   );
+
+  if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+    return <div>오류가 발생했습니다..</div>;
+  }
+
   const movieData = await res.json();
 
   const {
