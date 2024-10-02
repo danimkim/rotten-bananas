@@ -1,14 +1,11 @@
 import { css } from "../../../../styled-system/css";
 
 export default function Loading() {
-  return (
-    <div className={css({ textAlign: "center" })}>
-      <div className={spinner}></div>
-    </div>
-  );
+  return <div className={spinner}></div>;
 }
 
 const spinner = css({
+  marginTop: "20px",
   width: "30px",
   height: "30px",
   borderRadius: "50%",
