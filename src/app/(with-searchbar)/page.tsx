@@ -1,11 +1,16 @@
-import { css, cva } from "../../../styled-system/css";
+import MovieCard from "@/components/MovieCard";
+import { css } from "../../../styled-system/css";
 import { MovieData } from "../type";
 import { delay } from "../utils/delay";
-import MovieCard from "./components/MovieCard";
+import { Suspense } from "react";
+import MovieListSkeleton from "@/components/skeleton/MovieList";
 import { cardContainer } from "../../../styled-system/recipes";
 
+export const dynamic = "force-dynamic";
 
 async function AllMovies() {
+  // TODO: Temporary delay. Remove later
+  await delay(3000);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`, {
     cache: "force-cache",
   });
@@ -20,6 +25,8 @@ async function AllMovies() {
 }
 
 async function RecommendedMovies() {
+  // TODO: Temporary delay. Remove later
+  await delay(1500);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`,
     { next: { revalidate: 3 } }
@@ -40,13 +47,17 @@ export default function Home() {
       <section>
         <h2 className={headingStyle}>지금 가장 추천하는 영화</h2>
         <div className={cardContainer({ column: "3" })}>
-        <RecommendedMovies />
+          <Suspense fallback={<MovieListSkeleton count={3} />}>
+            <RecommendedMovies />
+          </Suspense>
         </div>
       </section>
       <section>
         <h2 className={headingStyle}>등록된 모든 영화</h2>
         <div className={cardContainer({ column: "5" })}>
-        <AllMovies />
+          <Suspense fallback={<MovieListSkeleton count={15} />}>
+            <AllMovies />
+          </Suspense>
         </div>
       </section>
     </>
