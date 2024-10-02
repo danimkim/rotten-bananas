@@ -27,6 +27,43 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {
+    recipes: {
+      cardContainer: {
+        className: "container",
+        description: "The styles for the MovieCard container",
+        base: {
+          marginTop: "5",
+          display: "grid",
+          gap: "2",
+        },
+        variants: {
+          column: {
+            "3": {
+              "grid-template-columns": "repeat(3, 1fr)",
+            },
+            "5": {
+              "grid-template-columns": "repeat(5, 1fr)",
+            },
+          },
+        },
+      },
+      card: {
+        className: "card",
+        description: "The styles for the MovieCard",
+        base: {
+          position: "relative",
+          aspectRatio: "1/1.5",
+        },
+        variants: {
+          type: {
+            skeleton: {
+              backgroundColor: "#292929",
+              animation: "pulse 1s infinite linear",
+            },
+          },
+        },
+      },
+    },
     extend: {
       keyframes: {
         spinner: {
