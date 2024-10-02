@@ -2,8 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { css } from "../../../../styled-system/css";
-import { hstack } from "../../../../styled-system/patterns";
+import { css } from "../../styled-system/css";
+import { hstack } from "../../styled-system/patterns";
 
 export default function Searchbar() {
   const router = useRouter();
