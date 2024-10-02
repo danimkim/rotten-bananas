@@ -1,5 +1,5 @@
+import Searchbar from "@/components/Searchbar";
 import { Suspense } from "react";
-import Searchbar from "./components/Searchbar";
 
 export default async function Layout({
   children,
