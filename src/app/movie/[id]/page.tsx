@@ -2,6 +2,7 @@ import Image from "next/image";
 import { css } from "../../../../styled-system/css";
 import { MovieData } from "@/app/type";
 import { notFound } from "next/navigation";
+import { createReviewAction } from "@/actions/create-review.action";
 
 interface IProps {
   params: {
@@ -18,9 +19,9 @@ export async function generateStaticParams() {
   return movieData.map((data: MovieData) => ({ id: data.id.toString() }));
 }
 
-export default async function Page({ params }: IProps) {
+async function MovieDetail({ movieId }: { movieId: string }) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`
   );
 
   if (!res.ok) {
@@ -71,6 +72,26 @@ export default async function Page({ params }: IProps) {
         </ul>
       </div>
     </>
+  );
+}
+
+function ReviewEditor({ movieId }: { movieId: string }) {
+  return (
+    <form action={createReviewAction}>
+      <input type="text" defaultValue={movieId} name="movieId" hidden />
+      <input required type="text" placeholder="content" name="content" />
+      <input required type="text" placeholder="name" name="author" />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default function Page({ params }: IProps) {
+  return (
+    <section>
+      <MovieDetail movieId={params.id} />
+      <ReviewEditor movieId={params.id} />
+    </section>
   );
 }
 
