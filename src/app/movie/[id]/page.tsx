@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { css } from "../../../../styled-system/css";
-import { MovieData } from "@/app/type";
+import { css, cva } from "../../../../styled-system/css";
+import { MovieData, ReviewData } from "@/app/type";
 import { notFound } from "next/navigation";
 import { createReviewAction } from "@/actions/create-review.action";
+import ReviewItem from "@/components/ReviewItem";
+import ArrowIcon from "@/app/public/ArrowIcon.svg";
 
 interface IProps {
   params: {
@@ -10,7 +12,7 @@ interface IProps {
   };
 }
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
@@ -77,12 +79,47 @@ async function MovieDetail({ movieId }: { movieId: string }) {
 
 function ReviewEditor({ movieId }: { movieId: string }) {
   return (
-    <form action={createReviewAction}>
+    <form action={createReviewAction} className={formStyle}>
       <input type="text" defaultValue={movieId} name="movieId" hidden />
-      <input required type="text" placeholder="content" name="content" />
-      <input required type="text" placeholder="name" name="author" />
-      <button type="submit">Submit</button>
+      <input
+        required
+        type="text"
+        placeholder="Username"
+        name="author"
+        className={inputStyle({ type: "name" })}
+      />
+      <textarea
+        required
+        placeholder="Add a review"
+        name="content"
+        className={inputStyle({ type: "review" })}
+      />
+      <button type="submit" className={buttonStyle}>
+        <Image src={ArrowIcon} alt="Submit" className={iconStyle} />
+      </button>
     </form>
+  );
+}
+
+async function ReviewList({ movieId }: { movieId: string }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`
+  );
+
+  if (!res.ok) {
+    throw new Error(`Review fetch failed: ${res.statusText}`);
+  }
+
+  const reviewData: ReviewData[] = await res.json();
+
+  return (
+    <ul>
+      {reviewData.map((data) => (
+        <li key={data.id}>
+          <ReviewItem data={data} />
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -91,6 +128,7 @@ export default function Page({ params }: IProps) {
     <section>
       <MovieDetail movieId={params.id} />
       <ReviewEditor movieId={params.id} />
+      <ReviewList movieId={params.id} />
     </section>
   );
 }
@@ -121,4 +159,47 @@ const posterStyle = css({
   position: "relative",
   width: "300px",
   aspectRatio: "1/1.5",
+});
+
+const formStyle = css({
+  width: "100%",
+  height: "40px",
+  display: "flex",
+  alignItems: "center",
+  gap: "4",
+});
+
+const inputStyle = cva({
+  base: {
+    borderBottom: `solid 1px var(--gray-primary)`,
+    width: "100%",
+    height: "100%",
+    padding: "5px",
+  },
+  variants: {
+    type: {
+      name: {
+        maxWidth: "200px",
+      },
+      review: {
+        resize: "none",
+      },
+    },
+  },
+});
+
+const buttonStyle = css({
+  borderRadius: "50%",
+  padding: "10px",
+  width: "40px",
+  height: "40px",
+  "&:hover": {
+    transition: "all ease-in-out 0.2s",
+    backgroundColor: "var(--gray-primary)",
+  },
+});
+
+const iconStyle = css({
+  width: "100%",
+  transform: "rotate(180deg)",
 });
