@@ -47,7 +47,7 @@ async function MovieDetail({ movieId }: { movieId: string }) {
   } = movieData;
 
   return (
-    <>
+    <section>
       <div
         style={{ backgroundImage: `url(${posterImgUrl})` }}
         className={posterBackgroundStyle}
@@ -73,31 +73,53 @@ async function MovieDetail({ movieId }: { movieId: string }) {
           <li className={css({ lineHeight: 1.8 })}>{description}</li>
         </ul>
       </div>
-    </>
+    </section>
   );
 }
 
 function ReviewEditor({ movieId }: { movieId: string }) {
   return (
-    <form action={createReviewAction} className={formStyle}>
-      <input type="text" defaultValue={movieId} name="movieId" hidden />
-      <input
-        required
-        type="text"
-        placeholder="Username"
-        name="author"
-        className={inputStyle({ type: "name" })}
-      />
-      <textarea
-        required
-        placeholder="Add a review"
-        name="content"
-        className={inputStyle({ type: "review" })}
-      />
-      <button type="submit" className={buttonStyle}>
-        <Image src={ArrowIcon} alt="Submit" className={iconStyle} />
-      </button>
-    </form>
+    <div>
+      <h3
+        className={css({
+          fontSize: "18px",
+          fontWeight: 600,
+          marginTop: "20px",
+        })}
+      >
+        Audience Reviews
+      </h3>
+      <form action={createReviewAction} className={formStyle}>
+        <input type="text" defaultValue={movieId} name="movieId" hidden />
+        <input
+          required
+          type="text"
+          placeholder="Username"
+          name="author"
+          className={inputStyle({ type: "name" })}
+        />
+        <input
+          required
+          type="number"
+          placeholder="Rate the movie (1~5)"
+          min={1}
+          max={5}
+          name="rating"
+          className={inputStyle({ type: "name" })}
+        />
+        <textarea
+          required
+          placeholder="Add a review"
+          name="content"
+          rows={3}
+          className={inputStyle({ type: "review" })}
+          maxLength={200}
+        />
+        <button type="submit" className={buttonStyle}>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 
@@ -125,11 +147,11 @@ async function ReviewList({ movieId }: { movieId: string }) {
 
 export default function Page({ params }: IProps) {
   return (
-    <section>
+    <>
       <MovieDetail movieId={params.id} />
       <ReviewEditor movieId={params.id} />
       <ReviewList movieId={params.id} />
-    </section>
+    </>
   );
 }
 
@@ -163,23 +185,23 @@ const posterStyle = css({
 
 const formStyle = css({
   width: "100%",
-  height: "40px",
   display: "flex",
-  alignItems: "center",
+  flexDirection: "column",
   gap: "4",
+  marginTop: "10px",
 });
 
 const inputStyle = cva({
   base: {
     borderBottom: `solid 1px var(--gray-primary)`,
     width: "100%",
-    height: "100%",
     padding: "5px",
   },
   variants: {
     type: {
       name: {
         maxWidth: "200px",
+        height: "100%",
       },
       review: {
         resize: "none",
@@ -189,17 +211,15 @@ const inputStyle = cva({
 });
 
 const buttonStyle = css({
-  borderRadius: "50%",
-  padding: "10px",
-  width: "40px",
-  height: "40px",
+  display: "inline-block",
+  maxWidth: "min-content",
+  alignSelf: "flex-end",
+  fontSize: "14px",
+  padding: "10px 25px",
+  backgroundColor: "var(--gray-primary)",
+  borderRadius: "20px",
   "&:hover": {
     transition: "all ease-in-out 0.2s",
-    backgroundColor: "var(--gray-primary)",
+    backgroundColor: "var(--gray-secondary)",
   },
-});
-
-const iconStyle = css({
-  width: "100%",
-  transform: "rotate(180deg)",
 });

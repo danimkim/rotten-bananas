@@ -16,4 +16,5 @@ export interface ReviewData {
   author: string;
   createdAt: string;
   movieId: number;
+  rating: number;
 }
