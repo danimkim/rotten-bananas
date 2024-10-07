@@ -4,7 +4,6 @@ import { MovieData, ReviewData } from "@/app/type";
 import { notFound } from "next/navigation";
 import { createReviewAction } from "@/actions/create-review.action";
 import ReviewItem from "@/components/ReviewItem";
-import ArrowIcon from "@/app/public/ArrowIcon.svg";
 
 interface IProps {
   params: {
@@ -12,10 +11,13 @@ interface IProps {
   };
 }
 
-// export const dynamicParams = false;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
+
+  if (!res.ok) throw new Error("Fetch failed: ~/movie");
+
   const movieData = await res.json();
 
   return movieData.map((data: MovieData) => ({ id: data.id.toString() }));
@@ -84,7 +86,7 @@ function ReviewEditor({ movieId }: { movieId: string }) {
         className={css({
           fontSize: "18px",
           fontWeight: 600,
-          marginTop: "20px",
+          marginTop: "40px",
         })}
       >
         Audience Reviews
@@ -98,7 +100,7 @@ function ReviewEditor({ movieId }: { movieId: string }) {
           name="author"
           className={inputStyle({ type: "name" })}
         />
-        <input
+        {/* <input
           required
           type="number"
           placeholder="Rate the movie (1~5)"
@@ -106,7 +108,7 @@ function ReviewEditor({ movieId }: { movieId: string }) {
           max={5}
           name="rating"
           className={inputStyle({ type: "name" })}
-        />
+        /> */}
         <textarea
           required
           placeholder="Add a review"
@@ -145,7 +147,7 @@ async function ReviewList({ movieId }: { movieId: string }) {
   );
 }
 
-export default function Page({ params }: IProps) {
+export default async function Page({ params }: IProps) {
   return (
     <>
       <MovieDetail movieId={params.id} />
@@ -193,7 +195,8 @@ const formStyle = css({
 
 const inputStyle = cva({
   base: {
-    borderBottom: `solid 1px var(--gray-primary)`,
+    border: `solid 1px var(--gray-primary)`,
+    borderRadius: "3px",
     width: "100%",
     padding: "5px",
   },
@@ -201,7 +204,7 @@ const inputStyle = cva({
     type: {
       name: {
         maxWidth: "200px",
-        height: "100%",
+        height: "35px",
       },
       review: {
         resize: "none",

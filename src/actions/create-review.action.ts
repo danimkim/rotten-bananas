@@ -6,8 +6,6 @@ export async function createReviewAction(formData: FormData) {
   const content = formData.get("content")?.toString();
   const rating = formData.get("rating")?.toString();
 
-  console.log(movieId, author, content);
-
   if (!movieId || !author || !content) return;
 
   try {
