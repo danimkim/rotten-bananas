@@ -1,6 +1,7 @@
 import { ReviewData } from "@/app/type";
 import { css } from "../../styled-system/css";
 import { hstack } from "../../styled-system/patterns";
+import ReviewDeleteButton from "./ReviewDeleteButton";
 
 export default function ReviewItem({ data }: { data: ReviewData }) {
   function getRandomNumber() {
@@ -19,7 +20,7 @@ export default function ReviewItem({ data }: { data: ReviewData }) {
         <p>{data.content}</p>
         <div className={css({ marginTop: "10px" })}>
           <span>{`${new Date(data.createdAt).toLocaleString()} | Original Score: ${rating}/5 | `}</span>
-          <button>Delete</button>
+          <ReviewDeleteButton movieId={data.movieId} reviewId={data.id} />
         </div>
       </div>
     </div>

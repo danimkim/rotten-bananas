@@ -17,7 +17,7 @@ export async function createReviewAction(_: any, formData: FormData) {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/aa`,
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review`,
       {
         method: "POST",
         body: JSON.stringify({ movieId, author, content, rating }),

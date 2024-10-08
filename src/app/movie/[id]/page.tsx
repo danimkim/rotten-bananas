@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { css, cva } from "../../../../styled-system/css";
+import { css } from "../../../../styled-system/css";
 import { MovieData, ReviewData } from "@/app/type";
 import { notFound } from "next/navigation";
 import ReviewItem from "@/components/ReviewItem";

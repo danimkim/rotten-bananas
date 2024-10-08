@@ -63,6 +63,27 @@ export default defineConfig({
           },
         },
       },
+      loadingSpinner: {
+        className: "spinner",
+        description: "Spinning animation styles for a loading spinner",
+        base: {
+          width: "15px",
+          height: "15px",
+          mx: "auto",
+          borderRadius: "50%",
+          background: "conic-gradient(#000 10%, var(--white-primary))",
+          WebkitMask:
+            "radial-gradient(farthest-side, #0000 calc(100% - 2px), #000 0)",
+          animation: `spinner 1s infinite linear`,
+        },
+        variants: {
+          type: {
+            pageLoading: {
+              background: "conic-gradient(#000 10%, var(--yellow-primary))",
+            },
+          },
+        },
+      },
     },
     extend: {
       keyframes: {
