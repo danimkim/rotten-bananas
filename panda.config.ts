@@ -78,8 +78,10 @@ export default defineConfig({
         },
         variants: {
           type: {
-            pageLoading: {
+            component: {
               background: "conic-gradient(#000 10%, var(--yellow-primary))",
+              WebkitMask:
+                "radial-gradient(farthest-side, #0000 calc(100% - 5px), #000 0)",
             },
           },
         },

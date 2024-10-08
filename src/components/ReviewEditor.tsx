@@ -3,6 +3,7 @@
 import { createReviewAction } from "@/actions/create-review.action";
 import { css, cva } from "../../styled-system/css";
 import { useActionState, useEffect } from "react";
+import { loadingSpinner } from "../../styled-system/recipes";
 
 export default function ReviewEditor({ movieId }: { movieId: string }) {
   const [state, formAction, isPending] = useActionState(
@@ -61,7 +62,7 @@ export default function ReviewEditor({ movieId }: { movieId: string }) {
           className={buttonStyle}
           data-loaing
         >
-          {isPending ? <div className={spinner}></div> : `Submit`}
+          {isPending ? <div className={loadingSpinner()}></div> : `Submit`}
         </button>
       </form>
     </div>
@@ -109,14 +110,4 @@ const buttonStyle = css({
     transition: "all ease-in-out 0.2s",
     backgroundColor: "var(--gray-secondary)",
   },
-});
-
-const spinner = css({
-  width: "15px",
-  height: "15px",
-  mx: "auto",
-  borderRadius: "50%",
-  background: "conic-gradient(#000 10%, var(--white-primary))",
-  WebkitMask: "radial-gradient(farthest-side, #0000 calc(100% - 2px), #000 0)",
-  animation: `spinner 1s infinite linear`,
 });
