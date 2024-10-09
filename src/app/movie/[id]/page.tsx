@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import ReviewItem from "@/components/ReviewItem";
 import ReviewEditor from "@/components/ReviewEditor";
 
-interface IProps {
+export interface IMoviePageProps {
   params: {
     id: string;
   };
@@ -103,7 +103,7 @@ async function ReviewList({ movieId }: { movieId: string }) {
   );
 }
 
-export default function Page({ params }: IProps) {
+export default function Page({ params }: IMoviePageProps) {
   return (
     <>
       <MovieDetail movieId={params.id} />
