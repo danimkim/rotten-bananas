@@ -1,16 +1,15 @@
 import MovieCard from "@/components/MovieCard";
 import { css } from "../../../styled-system/css";
 import { MovieData } from "../type";
-import { delay } from "../utils/delay";
 import { Suspense } from "react";
 import MovieListSkeleton from "@/components/skeleton/MovieList";
 import { cardContainer } from "../../../styled-system/recipes";
+import { Metadata } from "next";
+import { meta } from "@/constant";
 
 export const dynamic = "force-dynamic";
 
 async function AllMovies() {
-  // TODO: Temporary delay. Remove later
-  await delay(3000);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`, {
     cache: "force-cache",
   });
@@ -25,8 +24,6 @@ async function AllMovies() {
 }
 
 async function RecommendedMovies() {
-  // TODO: Temporary delay. Remove later
-  await delay(1500);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`,
     { next: { revalidate: 3 } }
@@ -40,6 +37,16 @@ async function RecommendedMovies() {
     <MovieCard key={data.id} {...data} />
   ));
 }
+
+export const metadata: Metadata = {
+  title: meta.default.title,
+  description: meta.default.desc,
+  openGraph: {
+    title: meta.default.title,
+    description: meta.default.desc,
+    images: [meta.default.imageUrl],
+  },
+};
 
 export default function Home() {
   return (
