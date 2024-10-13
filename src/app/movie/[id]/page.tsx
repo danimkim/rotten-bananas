@@ -12,8 +12,6 @@ export interface IMoviePageProps {
   };
 }
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
 
