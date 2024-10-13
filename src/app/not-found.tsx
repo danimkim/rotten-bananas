@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BananaImg from "@/app/public/annoying-banana.webp";
+import BananaImg from "./../../public/annoying-banana.webp";
 import { css } from "../../styled-system/css";
 import { center, vstack } from "../../styled-system/patterns";
 
