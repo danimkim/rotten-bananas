@@ -4,6 +4,7 @@ import { MovieData, ReviewData } from "@/app/type";
 import { notFound } from "next/navigation";
 import ReviewItem from "@/components/ReviewItem";
 import ReviewEditor from "@/components/ReviewEditor";
+import { Metadata } from "next";
 
 export interface IMoviePageProps {
   params: {
@@ -56,7 +57,12 @@ async function MovieDetail({ movieId }: { movieId: string }) {
         className={posterBackgroundStyle}
       >
         <div className={posterStyle}>
-          <Image src={posterImgUrl} alt={title} fill />
+          <Image
+            src={posterImgUrl}
+            alt={title}
+            fill
+            sizes={`(max-width:1100px) 100%`}
+          />
         </div>
       </div>
       <div>
@@ -101,6 +107,31 @@ async function ReviewList({ movieId }: { movieId: string }) {
       ))}
     </ul>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: IMoviePageProps): Promise<Metadata | null> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
+    { cache: "force-cache" }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  const movieData: MovieData = await res.json();
+
+  return {
+    title: `${movieData.title} | Rotten Bananas`,
+    description: movieData.description,
+    openGraph: {
+      title: `${movieData.title} | Rotten Bananas`,
+      description: movieData.description,
+      images: [movieData.posterImgUrl],
+    },
+  };
 }
 
 export default function Page({ params }: IMoviePageProps) {

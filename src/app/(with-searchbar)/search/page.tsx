@@ -1,10 +1,11 @@
-import { delay } from "@/app/utils/delay";
 import { css } from "../../../../styled-system/css";
 import MovieCard from "@/components/MovieCard";
 import { MovieData } from "@/app/type";
 import { cardContainer } from "../../../../styled-system/recipes";
 import { Suspense } from "react";
 import MovieListSkeleton from "@/components/skeleton/MovieList";
+import { Metadata } from "next";
+import { meta } from "@/constant";
 
 interface IProps {
   searchParams: {
@@ -13,9 +14,6 @@ interface IProps {
 }
 
 async function SearchResults({ q }: { q: string }) {
-  // TODO: Temporary delay. Remove later
-  await delay(1500);
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
     { cache: "force-cache" }
@@ -26,6 +24,18 @@ async function SearchResults({ q }: { q: string }) {
   return searchResults.map((data: MovieData) => (
     <MovieCard key={data.id} {...data} />
   ));
+}
+
+export function generateMetadata({ searchParams: { q } }: IProps): Metadata {
+  return {
+    title: `Search Results | ${q}`,
+    description: meta.default.desc,
+    openGraph: {
+      title: `Search Results | ${q}`,
+      description: meta.default.desc,
+      images: [meta.default.imageUrl],
+    },
+  };
 }
 
 export default function Page({ searchParams: { q } }: IProps) {
