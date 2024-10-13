@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Rotten Bananas 🍌
 
-## Getting Started
+<p align="center">
+<img src="https://github.com/user-attachments/assets/2f0429fd-eabb-47a0-90ed-6b16a73e82d4" width="600" alt="Rotten Bananas">
+</p>
+<br>
 
-First, run the development server:
+A film review website, inspired by Rotten tomatoes.
+This project leverages Next.js 15.0.0-rc and PandaCSS to deliver a modern, efficient web application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Demo
+https://rotten-bananas.vercel.app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features Implemented
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Performance Optimizations
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+1. **Static Site Generation (SSG)**: Implemented SSG to serve pages quickly, reducing load times and improving overall performance.
+2. **Data Caching**: Utilized data caching mechanisms to minimize unnecessary API calls and enhance application responsiveness.
+3. **Image Optimization**: Employed Next.js image optimization techniques to ensure fast loading times while maintaining image quality.
 
-## Learn More
+### Enhanced User Experience
 
-To learn more about Next.js, take a look at the following resources:
+1. **Global Layout with Search Bar**: Designed and implemented a consistent global layout featuring a search bar component for easy navigation.
+2. **Streaming Components**: Utilized streaming for components that depend on time-consuming API responses, improving perceived performance.
+3. **Loading States and Error Handling**: Implemented loading states and robust error handling for form submissions and other user interactions to provide clear feedback and improve UX.
+Modal with Intercepting Routes: Leveraged Next.js intercepting routes to display modals for client-side rendered pages, creating a smooth, app-like experience.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### SEO and Metadata
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Dynamic Metadata**: Set up metadata for each page to improve search engine optimization and social media sharing capabilities.
 
-## Deploy on Vercel
+### Styling
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**PandaCSS Integration**: Utilized PandaCSS for efficient and maintainable styling throughout the application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<br>
+
+
+## WIP
+- [ ] Internationalization
+- [ ] Movie Rating
