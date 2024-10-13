@@ -34,8 +34,8 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 }
 
 const dialogStyle = css({
-  minWidth: "360px",
-  maxWidth: "60%",
+  minWidth: "580px",
+  maxWidth: "70%",
   aspectRatio: `1.5/1`,
   margin: "auto",
   backgroundColor: `var(--black-primary)`,

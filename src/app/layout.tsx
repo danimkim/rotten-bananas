@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { css } from "../../styled-system/css";
-import Logo from "./public/logo.png";
+import Logo from "./public/logo.webp";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -23,7 +23,13 @@ export default function RootLayout({
         <header className={style}>
           <h1 className={css({ display: "inline-block" })}>
             <Link href={"/"}>
-              <Image src={Logo} alt="Rotten Bananas" width={161} />
+              <Image
+                src={Logo}
+                alt="Rotten Bananas"
+                width={161}
+                height={71}
+                priority
+              />
             </Link>
           </h1>
         </header>

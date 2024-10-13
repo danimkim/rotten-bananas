@@ -56,7 +56,12 @@ async function MovieDetail({ movieId }: { movieId: string }) {
         className={posterBackgroundStyle}
       >
         <div className={posterStyle}>
-          <Image src={posterImgUrl} alt={title} fill />
+          <Image
+            src={posterImgUrl}
+            alt={title}
+            fill
+            sizes={`(max-width:1100px) 100%`}
+          />
         </div>
       </div>
       <div>

@@ -12,7 +12,7 @@ export default function NotFound() {
       <Image
         src={BananaImg}
         width={250}
-        alt="annoying banana"
+        alt="A banana with an unimpressed face"
         className={css({ marginTop: "5" })}
       />
     </div>

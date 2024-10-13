@@ -6,7 +6,12 @@ import { card } from "../../styled-system/recipes";
 export default function MovieCard({ id, title, posterImgUrl }: MovieData) {
   return (
     <Link href={`/movie/${id}`} className={card()}>
-      <Image src={posterImgUrl} alt={title} fill />
+      <Image
+        src={posterImgUrl}
+        alt={title}
+        fill
+        sizes={`(max-width: 1100px) 100%`}
+      />
     </Link>
   );
 }
