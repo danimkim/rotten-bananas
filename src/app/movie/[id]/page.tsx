@@ -12,8 +12,6 @@ export interface IMoviePageProps {
   };
 }
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
 
@@ -124,6 +122,7 @@ export async function generateMetadata({
   const movieData: MovieData = await res.json();
 
   return {
+    metadataBase: new URL("https://rotten-bananas.vercel.app"),
     title: `${movieData.title} | Rotten Bananas`,
     description: movieData.description,
     openGraph: {

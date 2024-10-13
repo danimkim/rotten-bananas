@@ -1,13 +1,9 @@
 import MovieCard from "@/components/MovieCard";
 import { css } from "../../../styled-system/css";
 import { MovieData } from "../type";
-import { Suspense } from "react";
-import MovieListSkeleton from "@/components/skeleton/MovieList";
 import { cardContainer } from "../../../styled-system/recipes";
 import { Metadata } from "next";
 import { meta } from "@/constant";
-
-export const dynamic = "force-dynamic";
 
 async function AllMovies() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`, {
@@ -54,17 +50,13 @@ export default function Home() {
       <section>
         <h2 className={headingStyle}>지금 가장 추천하는 영화</h2>
         <div className={cardContainer({ column: "3" })}>
-          <Suspense fallback={<MovieListSkeleton count={3} />}>
-            <RecommendedMovies />
-          </Suspense>
+          <RecommendedMovies />
         </div>
       </section>
       <section>
         <h2 className={headingStyle}>등록된 모든 영화</h2>
         <div className={cardContainer({ column: "5" })}>
-          <Suspense fallback={<MovieListSkeleton count={15} />}>
-            <AllMovies />
-          </Suspense>
+          <AllMovies />
         </div>
       </section>
     </>

@@ -28,6 +28,7 @@ async function SearchResults({ q }: { q: string }) {
 
 export function generateMetadata({ searchParams: { q } }: IProps): Metadata {
   return {
+    metadataBase: new URL("https://rotten-bananas.vercel.app"),
     title: `Search Results | ${q}`,
     description: meta.default.desc,
     openGraph: {
