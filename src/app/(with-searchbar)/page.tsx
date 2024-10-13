@@ -35,6 +35,7 @@ async function RecommendedMovies() {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rotten-bananas.vercel.app"),
   title: meta.default.title,
   description: meta.default.desc,
   openGraph: {
