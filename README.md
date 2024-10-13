@@ -8,8 +8,14 @@
 A film review website, inspired by Rotten tomatoes.
 This project leverages Next.js 15.0.0-rc and PandaCSS to deliver a modern, efficient web application.
 
+[➡️ README 한국어](https://github.com/danimkim/rotten-bananas/blob/app-router/main/README_KR.md)
+
+<br>
+
 ## Demo
 https://rotten-bananas.vercel.app
+
+<br>
 
 ## Features Implemented
 
