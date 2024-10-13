@@ -122,6 +122,7 @@ export async function generateMetadata({
   const movieData: MovieData = await res.json();
 
   return {
+    metadataBase: new URL("https://rotten-bananas.vercel.app"),
     title: `${movieData.title} | Rotten Bananas`,
     description: movieData.description,
     openGraph: {
