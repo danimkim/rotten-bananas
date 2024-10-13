@@ -1,6 +1,6 @@
 import "./globals.css";
 import { css } from "../../styled-system/css";
-import Logo from "./public/logo.webp";
+import Logo from "./../../public/logo.webp";
 import Link from "next/link";
 import Image from "next/image";
 

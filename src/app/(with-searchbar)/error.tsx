@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import BananaImg from "@/app/public/annoying-banana.webp";
+import BananaImg from "./../../../public/annoying-banana.webp";
 import { center, vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 
