@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["media.themoviedb.org"],
+    remotePatterns: [{ hostname: "media.themoviedb.org" }],
   },
   logging: {
     fetches: {
