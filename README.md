@@ -46,3 +46,4 @@ Modal with Intercepting Routes: Leveraged Next.js intercepting routes to display
 ## WIP
 - [ ] Internationalization
 - [ ] Movie Rating
+- [ ] User sign-in and authentication
